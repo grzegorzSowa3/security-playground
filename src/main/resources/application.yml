@@ -1,6 +1,10 @@
 server:
   servlet:
     context-path: /auth/
+    session:
+      cookie:
+        name: _session
+        secure: false
 
 spring:
   datasource:

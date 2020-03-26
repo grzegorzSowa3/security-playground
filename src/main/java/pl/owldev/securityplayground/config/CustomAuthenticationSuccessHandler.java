@@ -1,6 +1,7 @@
 package pl.owldev.securityplayground.config;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException{
-        response.sendRedirect("/home");
+        if (authentication.getAuthorities().toString().contains("ADMIN")) {
+            response.sendRedirect(request.getContextPath() + "/dashboard");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/home");
+        }
     }
 
 }

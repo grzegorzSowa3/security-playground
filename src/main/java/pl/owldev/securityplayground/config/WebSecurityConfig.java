@@ -39,17 +39,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/dashboard/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
+
                 .formLogin()
                 .loginPage("/login")
                 .failureHandler(authenticationFailureHandler())
                 .successHandler(authenticationSuccessHandler())
                 .permitAll()
                 .and()
+
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 .logoutSuccessHandler(logoutSuccessHandler())
                 .and()
-                .csrf().disable();
+
+                .csrf() ;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     private AuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -62,10 +70,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private LogoutSuccessHandler logoutSuccessHandler() {
         return new CustomLogoutSuccessHandler();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
