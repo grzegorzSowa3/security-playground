@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
-        response.sendRedirect("/login?error=true");
+        response.setStatus(UNAUTHORIZED.value());
+        response.sendRedirect(request.getContextPath() + "/login?error=failure");
     }
 
 }

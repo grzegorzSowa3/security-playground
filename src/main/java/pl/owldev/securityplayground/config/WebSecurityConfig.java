@@ -19,18 +19,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("user1pass")).roles("USER")
+                .withUser("user1@test.pl").password(passwordEncoder().encode("user1pass")).roles("USER")
                 .and()
-                .withUser("user2").password(passwordEncoder().encode("user2pass")).roles("USER")
+                .withUser("user2@test.pl").password(passwordEncoder().encode("user2pass")).roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder().encode("adminpass")).roles("ADMIN");
+                .withUser("admin@test.pl").password(passwordEncoder().encode("adminpass")).roles("ADMIN");
     }
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/dashboard/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

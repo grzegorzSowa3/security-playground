@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /auth/
+
 spring:
   datasource:
     driverClassName: org.h2.Driver
