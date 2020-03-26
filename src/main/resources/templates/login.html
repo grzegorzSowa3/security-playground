@@ -32,8 +32,8 @@
             </button>
         </div>
         <p style="text-align:center"> OR </p>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
         <p th:if="${(param.logged_out != null) and (param.logged_out[0] == 'true')}" class="info">Successfully logged
             out</p>
 
@@ -41,8 +41,7 @@
         <a href="#" id="forgot_pswd">Forgot password?</a>
         <hr>
         <!-- <p>Don't have an account!</p>  -->
-        <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up
-            New Account
+        <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Create new account
         </button>
     </form>
 
